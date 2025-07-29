@@ -1,0 +1,587 @@
+index.html
+html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ini Produk Loh - Toko Perabotan Rumah Tangga</title>
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2980b9;
+            --accent: #f39c12;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        nav {
+            background-color: var(--dark);
+            padding: 1rem;
+        }
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        nav li {
+            margin: 0 1rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: var(--accent);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .product-info {
+            padding: 1.5rem;
+        }
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        .product-price {
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        .product-desc {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        .product-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+        }
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            background-color: var(--light);
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+        .quantity-input {
+            width: 50px;
+            height: 30px;
+            text-align: center;
+            margin: 0 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .add-to-cart {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        .add-to-cart:hover {
+            background-color: #e67e22;
+        }
+        .cart-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+        .cart-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 0.5rem;
+        }
+        .cart-items {
+            margin-bottom: 1.5rem;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px dashed #ddd;
+        }
+        .cart-total {
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 1rem;
+        }
+        .cart-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+            gap: 1rem;
+        }
+        .cart-btn {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .checkout-btn {
+            background-color: var(--success);
+            color: white;
+        }
+        .checkout-btn:hover {
+            background-color: #27ae60;
+        }
+        .print-btn {
+            background-color: var(--primary);
+            color: white;
+        }
+        .print-btn:hover {
+            background-color: #2980b9;
+        }
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        .receipt {
+            background: white;
+            padding: 2rem;
+            max-width: 500px;
+            margin: 2rem auto;
+            display: none;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .receipt-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .receipt-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .receipt-address {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        .receipt-items {
+            margin-bottom: 1.5rem;
+        }
+        .receipt-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px dotted #ddd;
+            padding-bottom: 0.5rem;
+        }
+        .receipt-total {
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-align: right;
+            margin-top: 1rem;
+            border-top: 2px solid var(--dark);
+            padding-top: 1rem;
+        }
+        .receipt-date {
+            text-align: right;
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 1.5rem;
+        }
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .receipt, .receipt * {
+                visibility: visible;
+            }
+            .receipt {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                margin: 0;
+                box-shadow: none;
+            }
+        }
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav li {
+                margin: 0.5rem 0;
+            }
+            .products {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ini Produk Loh</h1>
+        <p>Jl. A. Yani KM.1 Kelurahan Batu Piring Kabupaten Balangan</p>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#produk">Produk</a></li>
+            <li><a href="#keranjang">Keranjang Belanja</a></li>
+            <li><a href="#kontak">Kontak Kami</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <section id="produk">
+            <h2 style="margin-bottom: 1.5rem; color: var(--dark);">Produk Unggulan Kami</h2>
+            <div class="products">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <img class="product-image" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/51dffcd6-9460-4e45-883c-9a200212ce81.png" alt="Lemari pakaian modern dengan 3 pintu berwarna cokelat kayu dan finishing glossy">
+                    <div class="product-info">
+                        <h3 class="product-title">Lemari Pakaian 3 Pintu</h3>
+                        <p class="product-price">Rp 5.000.000</p>
+                        <p class="product-desc">Lemari minimalis dengan 3 pintu, material kayu solid, dan finishing glossy yang elegan. Dilengkapi dengan rak dan gantungan bawaan.</p>
+                        <div class="product-controls">
+                            <div class="quantity-selector">
+                                <button class="quantity-btn minus" data-product="lemari">-</button>
+                                <input type="number" class="quantity-input" value="1" min="1" data-product="lemari">
+                                <button class="quantity-btn plus" data-product="lemari">+</button>
+                            </div>
+                            <button class="add-to-cart" data-product="lemari" data-price="5000000" data-name="Lemari Pakaian 3 Pintu">+ Keranjang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <img class="product-image" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9c4bba20-55cc-44ee-9173-5ea1a423a095.png" alt="Lemari pendingin stainless steel dua pintu dengan ukuran besar dan layar digital">
+                    <div class="product-info">
+                        <h3 class="product-title">Lemari Pendingin 2 Pintu</h3>
+                        <p class="product-price">Rp 4.000.000</p>
+                        <p class="product-desc">Kulkas hemat energi dengan teknologi inverter, kapasitas 400 liter, sistem pendingin cepat, dan kompartemen sayuran segar.</p>
+                        <div class="product-controls">
+                            <div class="quantity-selector">
+                                <button class="quantity-btn minus" data-product="kulkas">-</button>
+                                <input type="number" class="quantity-input" value="1" min="1" data-product="kulkas">
+                                <button class="quantity-btn plus" data-product="kulkas">+</button>
+                            </div>
+                            <button class="add-to-cart" data-product="kulkas" data-price="4000000" data-name="Lemari Pendingin 2 Pintu">+ Keranjang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <img class="product-image" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/56c2956a-7744-418c-bbd4-adb7321ecb30.png" alt="Set meja makan kayu jati untuk 6 orang dengan 6 kursi matching dan tampilan klasik">
+                    <div class="product-info">
+                        <h3 class="product-title">Meja Makan Full Set</h3>
+                        <p class="product-price">Rp 6.000.000</p>
+                        <p class="product-desc">Set meja makan kayu jati lengkap dengan 6 kursi. Desain klasik modern, ukuran meja 180cm x 90cm, cocok untuk keluarga.</p>
+                        <div class="product-controls">
+                            <div class="quantity-selector">
+                                <button class="quantity-btn minus" data-product="meja">-</button>
+                                <input type="number" class="quantity-input" value="1" min="1" data-product="meja">
+                                <button class="quantity-btn plus" data-product="meja">+</button>
+                            </div>
+                            <button class="add-to-cart" data-product="meja" data-price="6000000" data-name="Meja Makan Full Set">+ Keranjang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <img class="product-image" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a3c10f9b-4a32-4247-8631-eb151be8bbe8.png" alt="Kitchen set modern berwarna putih dengan counter top granit, kabinet atas dan bawah, serta peralatan built-in">
+                    <div class="product-info">
+                        <h3 class="product-title">Kitchen Set Modern</h3>
+                        <p class="product-price">Rp 20.000.000</p>
+                        <p class="product-desc">Kitchen set lengkap dengan material HPL grade A, kabinet dapur, cooking top built-in, dan wastafel stainless steel.</p>
+                        <div class="product-controls">
+                            <div class="quantity-selector">
+                                <button class="quantity-btn minus" data-product="kitchen">-</button>
+                                <input type="number" class="quantity-input" value="1" min="1" data-product="kitchen">
+                                <button class="quantity-btn plus" data-product="kitchen">+</button>
+                            </div>
+                            <button class="add-to-cart" data-product="kitchen" data-price="20000000" data-name="Kitchen Set Modern">+ Keranjang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <img class="product-image" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c37d3111-fd86-4adf-a1ee-e1b32c802063.png" alt="Mesin cuci front loading berwarna silver dengan kapasitas 10kg dan panel kontrol digital">
+                    <div class="product-info">
+                        <h3 class="product-title">Mesin Cuci Front Loading</h3>
+                        <p class="product-price">Rp 3.000.000</p>
+                        <p class="product-desc">Mesin cuci otomatis 10kg dengan 15 program cuci, teknologi inverter, hemat air, dan sistem antibakteri.</p>
+                        <div class="product-controls">
+                            <div class="quantity-selector">
+                                <button class="quantity-btn minus" data-product="cuci">-</button>
+                                <input type="number" class="quantity-input" value="1" min="1" data-product="cuci">
+                                <button class="quantity-btn plus" data-product="cuci">+</button>
+                            </div>
+                            <button class="add-to-cart" data-product="cuci" data-price="3000000" data-name="Mesin Cuci Front Loading">+ Keranjang</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="keranjang" class="cart-section">
+            <h2 class="cart-title">Keranjang Belanja</h2>
+            <div class="cart-items" id="cart-items">
+                <!-- Cart items will be dynamically inserted here -->
+                <p id="empty-cart-message">Keranjang belanja Anda masih kosong.</p>
+            </div>
+            <div class="cart-total" id="cart-total">
+                Total: Rp 0
+            </div>
+            <div class="cart-actions">
+                <button class="cart-btn checkout-btn" id="checkout-btn">Proses Pembayaran</button>
+                <button class="cart-btn print-btn" id="print-btn">Cetak Resi</button>
+            </div>
+        </section>
+        
+        <section id="kontak" class="cart-section">
+            <h2 class="cart-title">Kontak Kami</h2>
+            <p style="margin-bottom: 1rem;"><strong>Alamat:</strong> Jl. A. Yani KM.1 Kelurahan Batu Piring Kabupaten Balangan</p>
+            <p style="margin-bottom: 1rem;"><strong>Telepon:</strong> (0542) 123456</p>
+            <p><strong>Jam Operasional:</strong> Senin-Minggu, 08:00-17:00 WITA</p>
+        </section>
+    </div>
+    
+    <!-- Receipt Modal -->
+    <div class="receipt" id="receipt">
+        <div class="receipt-header">
+            <div class="receipt-title">Ini Produk Loh</div>
+            <div class="receipt-address">Jl. A. Yani KM.1 Kelurahan Batu Piring<br>Kabupaten Balangan</div>
+        </div>
+        <div class="receipt-items" id="receipt-items">
+            <!-- Receipt items will be inserted here -->
+        </div>
+        <div class="receipt-total" id="receipt-total">
+            Total: Rp 0
+        </div>
+        <div class="receipt-date" id="receipt-date">
+            <!-- Date will be inserted here -->
+        </div>
+    </div>
+    
+    <footer>
+        © 2023 Ini Produk Loh - Toko Perabotan Rumah Tangga
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize cart
+            let cart = [];
+            
+            // Quantity controls
+            document.querySelectorAll('.quantity-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const product = this.dataset.product;
+                    const input = document.querySelector(`.quantity-input[data-product="${product}"]`);
+                    let value = parseInt(input.value);
+                    
+                    if (this.classList.contains('minus') && value > 1) {
+                        input.value = value - 1;
+                    } else if (this.classList.contains('plus')) {
+                        input.value = value + 1;
+                    }
+                });
+            });
+            
+            // Add to cart
+            document.querySelectorAll('.add-to-cart').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = this.dataset.product;
+                    const productName = this.dataset.name;
+                    const productPrice = parseInt(this.dataset.price);
+                    const quantity = parseInt(document.querySelector(`.quantity-input[data-product="${productId}"]`).value);
+                    
+                    // Check if product already in cart
+                    const existingItem = cart.find(item => item.id === productId);
+                    
+                    if (existingItem) {
+                        existingItem.quantity += quantity;
+                    } else {
+                        cart.push({
+                            id: productId,
+                            name: productName,
+                            price: productPrice,
+                            quantity: quantity
+                        });
+                    }
+                    
+                    updateCart();
+                    document.getElementById('empty-cart-message').style.display = 'none';
+                    
+                    // Smooth scroll to cart
+                    document.getElementById('keranjang').scrollIntoView({behavior: 'smooth'});
+                });
+            });
+            
+            // Update cart display
+            function updateCart() {
+                const cartItemsEl = document.getElementById('cart-items');
+                const emptyCartMsg = document.getElementById('empty-cart-message');
+                const receiptItemsEl = document.getElementById('receipt-items');
+                
+                if (cart.length === 0) {
+                    emptyCartMsg.style.display = 'block';
+                    cartItemsEl.innerHTML = '';
+                } else {
+                    emptyCartMsg.style.display = 'none';
+                    
+                    // Update shopping cart
+                    let cartHTML = '';
+                    cart.forEach(item => {
+                        const total = item.price * item.quantity;
+                        cartHTML += `
+                            <div class="cart-item">
+                                <div>${item.name} (${item.quantity}x)</div>
+                                <div>Rp ${total.toLocaleString('id-ID')}</div>
+                            </div>
+                        `;
+                    });
+                    cartItemsEl.innerHTML = cartHTML;
+                    
+                    // Update receipt
+                    let receiptHTML = '';
+                    cart.forEach(item => {
+                        const total = item.price * item.quantity;
+                        receiptHTML += `
+                            <div class="receipt-item">
+                                <div>${item.name} (${item.quantity}x)</div>
+                                <div>Rp ${total.toLocaleString('id-ID')}</div>
+                            </div>
+                        `;
+                    });
+                    receiptItemsEl.innerHTML = receiptHTML;
+                }
+                
+                // Update totals
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                document.getElementById('cart-total').textContent = `Total: Rp ${total.toLocaleString('id-ID')}`;
+                document.getElementById('receipt-total').textContent = `Total: Rp ${total.toLocaleString('id-ID')}`;
+            }
+            
+            // Generate receipt date
+            function updateReceiptDate() {
+                const now = new Date();
+                const options = { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                };
+                document.getElementById('receipt-date').textContent = 
+                    `Tanggal: ${now.toLocaleDateString('id-ID', options)}`;
+            }
+            
+            // Print receipt
+            document.getElementById('print-btn').addEventListener('click', function() {
+                if (cart.length === 0) {
+                    alert('Keranjang belanja kosong. Silakan tambahkan produk terlebih dahulu.');
+                    return;
+                }
+                
+                updateReceiptDate();
+                document.getElementById('receipt').style.display = 'block';
+                window.print();
+                document.getElementById('receipt').style.display = 'none';
+            });
+            
+            // Checkout button
+            document.getElementById('checkout-btn').addEventListener('click', function() {
+                if (cart.length === 0) {
+                    alert('Keranjang belanja kosong. Silakan tambahkan produk terlebih dahulu.');
+                    return;
+                }
+                
+                if (confirm('Konfirmasi pembayaran?')) {
+                    alert('Pembayaran berhasil diproses! Terima kasih telah berbelanja di Ini Produk Loh.');
+                    cart = [];
+                    updateCart();
+                    document.getElementById('empty-cart-message').style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
